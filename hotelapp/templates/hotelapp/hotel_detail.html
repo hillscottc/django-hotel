@@ -1,0 +1,6 @@
+<h1>{{ hotel }}</h1>
+<ul>
+{% for reservation in hotel.reservation_set.all %}
+    <li>{{ reservation }}</li>
+{% endfor %}
+</ul>

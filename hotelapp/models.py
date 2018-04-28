@@ -19,4 +19,4 @@ class Reservation(models.Model):
         return self.date_res >= timezone.now()
 
     def __str__(self):
-        return self.date_res + " at " + self.hotel + " for " + self.customer
+        return self.date_res.strftime("%Y-%m-%d") + ' at ' + self.hotel.name + ' for ' + self.customer
