@@ -11,6 +11,10 @@ docker-compose up -d    (for background)
 
 docker ps (list)
 
+One liner to stop / remove all of Docker containers:
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
 docker-compose exec web bash (terminal to container)
 
 
