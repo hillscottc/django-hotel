@@ -12,3 +12,8 @@ docker-compose up -d    (for background)
 docker ps (list)
 
 docker-compose exec web bash (terminal to container)
+
+
+
+python manage.py makemigrations hotelapp
+python manage.py migrate
