@@ -1,7 +1,7 @@
 {% if hotel_list %}
     <ul>
     {% for hotel in hotel_list %}
-        <li><a href="{% url 'hotel_detail' hotel.id %}"">{{ hotel.name }}</a></li>
+        <li><a href="{% url 'hotelapp:hotel_detail' hotel.id %}"">{{ hotel.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

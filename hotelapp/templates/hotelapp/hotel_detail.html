@@ -1,4 +1,18 @@
 <h1>{{ hotel }}</h1>
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'hotelapp:reserve' hotel.id %}" method="post">
+	{% csrf_token %}
+	<p>Name: <input type="text" name="customer" /></p>
+	<p>Date: <input type="text" name="res_date" /></p>
+	<br/>
+	<input type="submit" value="Add!" />
+</form>
+
+
+<h3>Current Reservations</h3>
 <ul>
 {% for reservation in hotel.reservation_set.all %}
     <li>{{ reservation }}</li>
