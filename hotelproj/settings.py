@@ -118,6 +118,14 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'django.db.backends': {
+            'handlers': ['file'],
+            'level': 'INFO',  # set to DEBUG to see all the SQL
+        },  
+        'hotelapp': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        }              
     },
 }
 
