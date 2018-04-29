@@ -1,3 +1,5 @@
+<nav><a href="{% url 'hotelapp:index' %}"><- Hotels</a></nav>
+
 <h1>{{ hotel }}</h1>
 
 
@@ -6,7 +8,7 @@
 <form action="{% url 'hotelapp:reserve' hotel.id %}" method="post">
 	{% csrf_token %}
 	<p>Name: <input type="text" name="customer" /></p>
-	<p>Date: <input type="text" name="res_date" /></p>
+	<p>Date: <input type="text" name="date_res" value='2000-01-01'/></p>
 	<br/>
 	<input type="submit" value="Add!" />
 </form>

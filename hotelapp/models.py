@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
     num_rooms = models.IntegerField(default=100)
@@ -9,11 +10,13 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
 
+
 class ReservationManager(models.Manager):
     def create_res(self, hotel, customer, date_res):
         res = self.create(hotel=hotel, customer=customer, date_res=date_res)
         return res
-        
+      
+
 class Reservation(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     customer = models.CharField(max_length=100)    
@@ -26,5 +29,3 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.date_res.strftime("%Y-%m-%d") + ' at ' + self.hotel.name + ' for ' + self.customer
-
-

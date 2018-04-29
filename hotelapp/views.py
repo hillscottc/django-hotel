@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Hotel, Reservation
+import logging
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     hotel_list = Hotel.objects.all()
@@ -18,8 +21,12 @@ def hotel_reservations(request, hotel_id):
 
 def reserve(request, hotel_id):
     hotel = get_object_or_404(Hotel, pk=hotel_id)
-    res_date = request.POST['res_date']
+    date_res = request.POST['date_res']
     customer = request.POST['customer']
-    reservation = Reservation.objects.create_res(hotel, customer, res_date)
+
+    days_res = Reservation.objects.filter(date_res=date_res, hotel=hotel)
+    logger.info('days_res = ' + str(days_res.count()) )
+
+    reservation = Reservation.objects.create_res(hotel, customer, date_res)
     return HttpResponseRedirect(reverse('hotelapp:hotel_detail', args=(hotel.id,)))
 
