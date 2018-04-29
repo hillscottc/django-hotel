@@ -13,11 +13,15 @@ class Hotel(models.Model):
         return self.name
 
 
+class OverbookError(Exception):
+    logger.warn('Hotel is FULL for this day!')
+
+
 class ReservationManager(models.Manager):
     def create_res(self, hotel, customer, date_res):
         res = self.create(hotel=hotel, customer=customer, date_res=date_res)
         # call validation
-        res.full_clean()
+        # res.full_clean()
         return res
       
 
@@ -28,18 +32,18 @@ class Reservation(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     objects = ReservationManager()
 
-    def is_current(self):
-        return self.date_res >= timezone.now()
-
-    def clean(self):
-        logger.info('CLEANING...new res for hotel {}, on {}'.format(self.id, self.date_res.strftime("%Y-%m-%d")))
-
-        # Don't allow too many for hotel day
-        # days_res = Reservation.objects.filter(date_res=self.date_res, hotel__id=self.id)
-        # logger.warn('MODEL says Current num res for this day: ' + str(days_res.count()) )
-        # if days_res.count() >= (hotel.num_rooms + hotel.res_buffer):
-        #     raise ValidationError('Hotel is FULL for this day!')
-
-
     def __str__(self):
         return self.date_res.strftime("%Y-%m-%d") + ' at ' + self.hotel.name + ' for ' + self.customer
+
+    def is_current(self):
+        return self.date_res >= timezone.now()
+    
+    # def clean(self):
+    #     logger.info('CLEANING...new res for hotel {}, on {}'.format(
+    #         self.id, self.date_res.strftime("%Y-%m-%d")))
+
+    #     # Don't allow too many for hotel day
+    #     # THIS MUST CHECK **CURRENT*** RESERVATIONS, NOT ALL
+    #     res_count = Reservation.objects.filter(hotel=self.hotel, date_res=self.date_res).count()
+    #     if res_count >= (self.hotel.res_buffer + self.hotel.num_rooms):
+    #         raise OverbookError
