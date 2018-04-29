@@ -125,7 +125,7 @@ LOGGING = {
         'hotelapp': {
             'handlers': ['file'],
             'level': 'INFO',
-        }              
+        }                      
     },
 }
 
