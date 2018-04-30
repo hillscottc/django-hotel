@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 import logging
 logger = logging.getLogger('hotelapp')
 
+
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
     num_rooms = models.IntegerField(default=100)
@@ -34,16 +35,12 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.date_res.strftime("%Y-%m-%d") + ' at ' + self.hotel.name + ' for ' + self.customer
-
-    def is_current(self):
-        return self.date_res >= timezone.now()
     
     # def clean(self):
     #     logger.info('CLEANING...new res for hotel {}, on {}'.format(
     #         self.id, self.date_res.strftime("%Y-%m-%d")))
 
     #     # Don't allow too many for hotel day
-    #     # THIS MUST CHECK **CURRENT*** RESERVATIONS, NOT ALL
     #     res_count = Reservation.objects.filter(hotel=self.hotel, date_res=self.date_res).count()
     #     if res_count >= (self.hotel.res_buffer + self.hotel.num_rooms):
     #         raise OverbookError
