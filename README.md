@@ -39,7 +39,7 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
     sudo docker-compose run web python manage.py createsuperuser
     ```
 
-#### My random notes
+#### Some random notes
 - Run containers in the background: `docker-compose up -d`    
 - Are they still running? `docker ps`
 - Terminal to running container: `docker-compose exec web bash`
