@@ -39,7 +39,7 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
 
 - The db is managed with Django's admin interface at <http://localhost:8000/admin>  
 
-    - TODO: Need `sudo docker-compose run web python manage.py migrate` to init the db?
+    - `sudo docker-compose run web python manage.py migrate` to init the db.
 
     - Create an admin account.
     ```bash
@@ -69,7 +69,6 @@ To POST using JSON:
 ```bash
 http --json POST http://127.0.0.1:8000/api/hotels/ name="Hotel Three" num_rooms=5
 ```
-Add a --debug switch to the http requests above to see the request type in request headers.
 
 Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
 
@@ -80,6 +79,7 @@ Using [httpie](https://github.com/jakubroztocil/httpie#installation).
 http http://localhost:8000/api/hotels/
 http http://localhost:8000/api/hotels/1/
 http http://localhost:8000/api/hotels/1.json
+http --json POST http://127.0.0.1:8000/api/reservations/ hotel=6 client_name='Jackson' res_date='2020-02-05'
 ```
 
 
