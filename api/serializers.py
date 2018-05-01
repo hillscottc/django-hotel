@@ -11,4 +11,4 @@ class HotelSerializer(serializers.ModelSerializer):
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ('id', 'hotel', 'client_name', 'client_email', 'date_start', 'date_end')
+        fields = ('id', 'hotel', 'client_name', 'client_email', 'res_date')
