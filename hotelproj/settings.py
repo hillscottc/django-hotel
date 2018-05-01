@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'hotelapp.apps.HotelappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +127,11 @@ LOGGING = {
         'hotelapp': {
             'handlers': ['file'],
             'level': 'INFO',
-        }                      
+        } ,
+        'api': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        }
     },
 }
 

@@ -42,3 +42,6 @@ def reserve(request, hotel_id):
 
     return HttpResponseRedirect(reverse('hotelapp:hotel_detail', args=(hotel.id,)))
 
+
+
+

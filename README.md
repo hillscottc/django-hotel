@@ -39,6 +39,12 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
     sudo docker-compose run web python manage.py createsuperuser
     ```
 
+## Testing
+```bash
+curl -H 'Accept: application/json; indent=4' -u admin:adminadmin http://localhost:8000/api/users/
+```
+
+
 #### Some random notes
 - Run containers in the background: `docker-compose up -d`    
 - Are they still running? `docker ps`
