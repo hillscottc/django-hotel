@@ -1,7 +1,14 @@
 # django-hotel
 
 ## The Task
-Your task is to implement the system that allows a configured level of overbooking. Level of overbooking indicates number of reservations that can be booked over the hotel
+Your friend is asking to help with hotel management. Hotel is at a good location, and a lot of
+reservations are made. However, life is not simple, and quite a reasonable percent of booked
+reservations gets canceled. As a result, hotel sometimes has too many vacant rooms.
+Your friend has a brilliant idea: implement a reservations management system that allows some
+overbooking, so even if some room is reserved by someone at a specific date, other people still
+can book it. 
+
+Level of overbooking indicates number of reservations that can be booked over the hotel
 capacity. Consider a hotel with 100 rooms. If level of overbooking is set to 0%, we cannot make more than 100 reservations for a specific
 date. If level of overbooking is set to 10%, we can create up to 110 reservations for a specific date.
 
@@ -32,16 +39,47 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
 
 - The db is managed with Django's admin interface at <http://localhost:8000/admin>  
 
-    - Need `sudo docker-compose run web python manage.py migrate` to init the db?
+    - TODO: Need `sudo docker-compose run web python manage.py migrate` to init the db?
 
     - Create an admin account.
     ```bash
     sudo docker-compose run web python manage.py createsuperuser
     ```
 
-## Testing
+
+### Functionality
+Baisc functionality is provided by the [Django REST framework](http://www.django-rest-framework.org/)  
+The system utility [httpie](https://github.com/jakubroztocil/httpie#installation) is used for these examples.
+
+We can control the format of the response that we get back, either by using the Accept header:
 ```bash
-curl -H 'Accept: application/json; indent=4' -u admin:adminadmin http://localhost:8000/api/users/
+http http://127.0.0.1:8000/hotels/ Accept:application/json  # Request JSON
+http http://127.0.0.1:8000/hotels/ Accept:text/html         # Request HTML
+
+```
+
+Or by appending a format suffix:
+```bash
+http http://127.0.0.1:8000/hotels.json  # JSON suffix
+http http://127.0.0.1:8000/hotels.api   # Browsable API suffix
+```
+
+Control the format of the request using the Content-Type header.  
+To POST using JSON:
+```bash
+http --json POST http://127.0.0.1:8000/api/hotels/ name="Hotel Three" num_rooms=5
+```
+Add a --debug switch to the http requests above to see the request type in request headers.
+
+Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
+
+
+## Testing
+Using [httpie](https://github.com/jakubroztocil/httpie#installation).
+```bash
+http http://localhost:8000/api/hotels/
+http http://localhost:8000/api/hotels/1/
+http http://localhost:8000/api/hotels/1.json
 ```
 
 
