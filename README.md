@@ -21,7 +21,7 @@ Your application has to expose 2 REST API endpoints using Python Django framewor
 When max number of reservations is reached, the second endpoint responds with an error.
 
 
-## Installation and Usage
+## Installation
 This app runs in a Docker environment. Docker Compose is used to manage two containers: Django/Web and PostgreSQL instances.
 
 - If necessary, install <a href="https://docs.docker.com/install/">Docker</a> and <a href="https://docs.docker.com/compose/install/#install-compose">Docker Compose</a>.
@@ -48,7 +48,7 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
 
 
 ### Functionality
-Baisc functionality is provided by the [Django REST framework](http://www.django-rest-framework.org/)  
+Basic functionality is provided by the [Django REST framework](http://www.django-rest-framework.org/)  
 The system utility [httpie](https://github.com/jakubroztocil/httpie#installation) is used for these examples.
 
 We can control the format of the response that we get back, either by using the Accept header:
@@ -80,6 +80,7 @@ http http://localhost:8000/api/hotels/
 http http://localhost:8000/api/hotels/1/
 http http://localhost:8000/api/hotels/1.json
 http --json POST http://127.0.0.1:8000/api/reservations/ hotel=6 client_name='Jackson' res_date='2020-02-05'
+http --json PUT http://127.0.0.1:8000/api/hotels/1/ name='Hotel 1' num_rooms=10 res_buffer=2
 ```
 
 

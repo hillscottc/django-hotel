@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Hotel, Reservation, OverbookError
+# from .models import Hotel, Reservation, OverbookError
+from api.models import Hotel, Reservation
 import logging
 logger = logging.getLogger(__name__)
 
