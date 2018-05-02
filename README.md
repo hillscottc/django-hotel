@@ -16,13 +16,13 @@ This app runs in a Docker environment. Docker Compose is used to manage two cont
     ```bash
     docker-compose up
     ```
-- (Some docker daemons run other than localhost...depends on the docker install.)
+- (Some docker daemons run other than localhost...like '127.0.0.1' or '0.0.0.0'...depends on the system.)
 
-- `sudo docker-compose run web python manage.py migrate` to init the db.
+- `docker-compose run web python manage.py migrate` to init the db.
 
 - Create an admin account.
     ```bash
-    sudo docker-compose run web python manage.py createsuperuser
+    docker-compose run web python manage.py createsuperuser
     ```
 
     - The db is managed with Django's admin interface at <http://localhost:8000/admin>  
@@ -33,8 +33,8 @@ The system utility [httpie](https://github.com/jakubroztocil/httpie#installation
 
 We can control the format of the response by adding a format suffix:
 ```bash
-http http://127.0.0.1:8000/api/hotels.json  # JSON suffix
-http http://127.0.0.1:8000/api/hotels.api   # Browsable API suffix
+http http://localhost:8000/api/hotels.json  # JSON suffix
+http http://localhost:8000/api/hotels.api   # Browsable API suffix
 ```
 
 Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
@@ -48,10 +48,13 @@ http http://localhost:8000/api/hotels/
 http http://localhost:8000/api/hotels/1/
 http http://localhost:8000/api/hotels/1.json
 
+# Create a Hotel
+http --json POST http://localhost:8000/api/hotels/ name='Hotel 1' num_rooms=10 res_buffer=2
+
 # Update a hotel
-http --json PUT http://127.0.0.1:8000/api/hotels/1/ name='Hotel 1' num_rooms=10 res_buffer=2
+http --json PUT http://localhost:8000/api/hotels/0/ name='Hotel 1' num_rooms=5 res_buffer=1
 
 # Create a Reservation. Returns error when overbook reached.
-http --json POST http://127.0.0.1:8000/api/reservations/ hotel=6 client_name='Jackson' res_date='2020-02-05'
+http --json POST http://localhost:8000/api/reservations/ hotel=0 client_name='Jackson' res_date='2020-02-05'
 
 ```
