@@ -37,7 +37,7 @@ http http://localhost:8000/api/hotels.json  # JSON suffix
 http http://localhost:8000/api/hotels.api   # Browsable API suffix
 ```
 
-Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
+Browse the API in a web browser, by visiting <http://localhost:8000/hotels/>
 
 
 ## Testing
