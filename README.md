@@ -33,8 +33,8 @@ The system utility [httpie](https://github.com/jakubroztocil/httpie#installation
 
 We can control the format of the response by adding a format suffix:
 ```bash
-http http://127.0.0.1:8000/hotels.json  # JSON suffix
-http http://127.0.0.1:8000/hotels.api   # Browsable API suffix
+http http://127.0.0.1:8000/api/hotels.json  # JSON suffix
+http http://127.0.0.1:8000/api/hotels.api   # Browsable API suffix
 ```
 
 Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
@@ -47,6 +47,11 @@ Additional endpoint testing with [httpie](https://github.com/jakubroztocil/httpi
 http http://localhost:8000/api/hotels/
 http http://localhost:8000/api/hotels/1/
 http http://localhost:8000/api/hotels/1.json
-http --json POST http://127.0.0.1:8000/api/reservations/ hotel=6 client_name='Jackson' res_date='2020-02-05'
+
+# Update a hotel
 http --json PUT http://127.0.0.1:8000/api/hotels/1/ name='Hotel 1' num_rooms=10 res_buffer=2
+
+# Create a Reservation. Returns error when overbook reached.
+http --json POST http://127.0.0.1:8000/api/reservations/ hotel=6 client_name='Jackson' res_date='2020-02-05'
+
 ```
