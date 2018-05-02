@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
-    'hotelapp.apps.HotelappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,11 +122,7 @@ LOGGING = {
         'django.db.backends': {
             'handlers': ['file'],
             'level': 'INFO',  # set to DEBUG to see all the SQL
-        },  
-        'hotelapp': {
-            'handlers': ['file'],
-            'level': 'INFO',
-        } ,
+        },
         'api': {
             'handlers': ['file'],
             'level': 'INFO',
