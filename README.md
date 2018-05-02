@@ -44,7 +44,9 @@ Browse the API in a web browser, by visiting <http://127.0.0.1:8000/hotels/>
 
 
 ## Testing
-Using [httpie](https://github.com/jakubroztocil/httpie#installation).
+Run the automated unit tests with `python manage.py test`
+
+Also for endpoint testing, use [httpie](https://github.com/jakubroztocil/httpie#installation).
 ```bash
 http http://localhost:8000/api/hotels/
 http http://localhost:8000/api/hotels/1/
