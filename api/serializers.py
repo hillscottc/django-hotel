@@ -25,8 +25,9 @@ def validate_for_overbook(hotel, start_date, end_date):
                                               end_date__lte=single_date,
                                               hotel=hotel)
         # print('{} res on day {}'.format(days_res.count(), day.strftime("%Y-%m-%d")))
-        if days_res.count() >= (hotel.num_rooms + hotel.res_buffer):
-            raise serializers.ValidationError('Hotel is FULL for this day.')
+        if days_res.count() >= hotel.max_rooms:
+            raise serializers.ValidationError(
+                'Hotel is FULL on {}.'.format(single_date.strftime("%Y-%m-%d")))
 
 
 class ReservationSerializer(serializers.ModelSerializer):

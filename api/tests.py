@@ -13,6 +13,12 @@ class HotelTestCase(TestCase):
         hotel = Hotel.objects.get(name="Test Hotel 1")
         self.assertEqual(hotel.num_rooms, 4)
 
+    def test_max_rooms(self):
+        """max rooms = num + buf/100"""
+        Hotel.objects.create(name="Test Hotel 1", num_rooms=2, res_buffer=50)
+        hotel = Hotel.objects.get(name="Test Hotel 1")
+        self.assertEqual(hotel.max_rooms, 3)
+
 
 def get_reservation_serializer(reservation):
     serializer = ReservationSerializer(reservation)
@@ -37,21 +43,20 @@ class ReservationTestCase(TestCase):
         """
         Reservation overbook check via serializer.
         """
-        # hotel with 3+1 rooms
-        hotel = Hotel.objects.create(name="Test Hotel 1", num_rooms=3, res_buffer=1)
+        # hotel with max 3 rooms
+        hotel = Hotel.objects.create(name="Test Hotel 1", num_rooms=2, res_buffer=50)
         d = {'hotel': hotel, 'client_name': 'Smith',
              'start_date': "2020-01-01", 'end_date': '2020-01-01'}
         Reservation.objects.create(**d)
         Reservation.objects.create(**d)
-        Reservation.objects.create(**d)
 
-        # Fourth room is ok
+        # Third room is ok
         reservation = Reservation(**d)
         serializer = get_reservation_serializer(reservation)
         self.assertEqual(serializer.is_valid(), True)
         reservation.save()
 
-        # Five is too many
+        # Four is too many
         reservation = Reservation(**d)
         serializer = get_reservation_serializer(reservation)
         self.assertEqual(serializer.is_valid(), False)

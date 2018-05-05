@@ -4,10 +4,15 @@ from django.db import models
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
     num_rooms = models.IntegerField(default=100)
-    res_buffer = models.IntegerField(default=0)
+    res_buffer = models.IntegerField(default=0)  # Percent
 
     def __str__(self):
         return self.name
+
+    def get_max_rooms(self):
+        return ((self.res_buffer / 100) * self.num_rooms) + self.num_rooms
+
+    max_rooms = property(get_max_rooms)
 
     class Meta:
         ordering = ('name',)
