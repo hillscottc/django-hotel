@@ -17,12 +17,14 @@ class Reservation(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     client_name = models.CharField(max_length=100)
     client_email = models.EmailField(max_length=254, null=True)
-    res_date = models.DateField('Date of the stay.')
+    start_date = models.DateField('Start of the stay.')
+    end_date = models.DateField('End of the stay.')
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} at {} for {}".format(
-            self.res_date.strftime("%Y-%m-%d"),
+        return "{} to {} at {} for {}".format(
+            self.start_date.strftime("%Y-%m-%d"),
+            self.end_date.strftime("%Y-%m-%d"),
             self.hotel.name,
             self.client_name
         )
