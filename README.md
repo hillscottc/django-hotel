@@ -54,7 +54,7 @@ http --json POST http://localhost:8000/api/hotels/ name='Hotel 1' num_rooms=10 r
 # Update a hotel
 http --json PUT http://localhost:8000/api/hotels/0/ name='Hotel 1' num_rooms=5 res_buffer=1
 
-# Create a Reservation. Returns error when overbook reached.
-http --json POST http://localhost:8000/api/reservations/ hotel=0 client_name='Jackson' res_date='2020-02-05'
+# Create a Reservation. 
+http --json POST http://localhost:8000/api/reservations/ hotel=0 client_name='Jackson' start_date='2020-02-05' end_date='2020-02-06'
 
 ```

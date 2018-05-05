@@ -14,7 +14,7 @@ class HotelTestCase(TestCase):
         self.assertEqual(hotel.num_rooms, 4)
 
     def test_max_rooms(self):
-        """max rooms = num + buf/100"""
+        """max rooms = num + (buf/100 * num)"""
         Hotel.objects.create(name="Test Hotel 1", num_rooms=2, res_buffer=50)
         hotel = Hotel.objects.get(name="Test Hotel 1")
         self.assertEqual(hotel.max_rooms, 3)
